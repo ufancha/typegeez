@@ -25,7 +25,7 @@ function typegeez_render_block($atts = array()){
       <div class="editor-top">
         <div class="info">Use your physical keyboard. Toggle phonetic mode for transliteration-based input.</div>
         <div class="modes">
-          <button id="phoneticToggleBtn" class="phonetic-btn" aria-pressed="false" aria-label="Toggle phonetic Amharic input">አማርኛ</button>
+          <button id="phoneticToggleBtn" class="phonetic-btn off" aria-pressed="false" aria-label="Toggle Ge'ez input">ግ | ግእዝ Ge'ez</button>
         </div>
   <div class="switch-state" id="switchState" aria-live="polite">Off</div>
       </div>

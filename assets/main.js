@@ -13,10 +13,38 @@
   let latinBuffer = ''; let lastTranslit = ''; let composing = false;
 
   function phoneticOn(){ return phoneticBtn && phoneticBtn.getAttribute('aria-pressed') === 'true'; }
-  function updateSwitchState(){ const el = document.getElementById('switchState'); if(!el) return; if(phoneticOn()){ el.textContent = 'On'; el.classList.add('on'); } else { el.textContent = 'Off'; el.classList.remove('on'); }}
-  function setPhonetic(on){ if(!phoneticBtn) return; phoneticBtn.setAttribute('aria-pressed', on ? 'true' : 'false'); updateSwitchState(); if(on){ bufferStart = output.selectionStart || 0; wordBuffer = ''; latinBuffer = ''; lastTranslit=''; composing=false; if(suggestionsRoot){ suggestionsRoot.innerHTML=''; } compositionRoot.textContent=''; if(pendingCommit){ clearTimeout(pendingCommit); pendingCommit=null; pendingCommitKey=null; } } else { bufferStart = null; wordBuffer=''; latinBuffer=''; lastTranslit=''; composing=false; if(suggestionsRoot){ suggestionsRoot.innerHTML=''; } compositionRoot.textContent=''; }}
+  function updateSwitchState(){
+    const el = document.getElementById('switchState');
+    if(!el) return;
+    if(phoneticOn()){ el.textContent = 'On'; el.classList.add('on'); }
+    else { el.textContent = 'Off'; el.classList.remove('on'); }
+  }
+  function updatePhoneticBtnVisual(){
+    if(!phoneticBtn) return;
+    // Ensure unified label and color classes
+    phoneticBtn.textContent = 'ግ | ግእዝ Ge\'ez';
+    phoneticBtn.classList.remove('on','off');
+    phoneticBtn.classList.add(phoneticOn() ? 'on' : 'off');
+  }
+  function setPhonetic(on){
+    if(!phoneticBtn) return;
+    phoneticBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    updateSwitchState();
+    updatePhoneticBtnVisual();
+    if(on){
+      bufferStart = output.selectionStart || 0; wordBuffer = ''; latinBuffer = ''; lastTranslit=''; composing=false;
+      if(suggestionsRoot){ suggestionsRoot.innerHTML=''; }
+      compositionRoot.textContent='';
+      if(pendingCommit){ clearTimeout(pendingCommit); pendingCommit=null; pendingCommitKey=null; }
+    } else {
+      bufferStart = null; wordBuffer=''; latinBuffer=''; lastTranslit=''; composing=false;
+      if(suggestionsRoot){ suggestionsRoot.innerHTML=''; }
+      compositionRoot.textContent='';
+    }
+  }
   if(phoneticBtn) phoneticBtn.addEventListener('click', ()=> setPhonetic(!phoneticOn()));
   updateSwitchState(); setPhonetic(false);
+  updatePhoneticBtnVisual();
 
   // helpers
   function insertAtCursor(text){ const start = output.selectionStart || 0; const end = output.selectionEnd || 0; output.value = output.value.slice(0,start) + text + output.value.slice(end); const pos = start + text.length; output.selectionStart = output.selectionEnd = pos; output.focus(); }

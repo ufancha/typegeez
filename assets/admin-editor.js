@@ -14,7 +14,14 @@
   var lastTranslitTitle = '';
   var suppressInputTitle = false;
 
-  function setAria(btn, val){ btn.attr('aria-pressed', val ? 'true' : 'false'); btn.text(val ? "Disable Ge'ez phonetic typing" : "Enable Ge'ez phonetic typing"); }
+  function setAria(btn, val){
+    btn.attr('aria-pressed', val ? 'true' : 'false');
+    // Fixed label per request
+    btn.text("ግ | ግእዝ Ge'ez");
+    // Color feedback: green when on, gray when off
+    if(val){ btn.css({ backgroundColor:'#2ecc71', borderColor:'#27ae60', color:'#ffffff' }); }
+    else { btn.css({ backgroundColor:'#bdc3c7', borderColor:'#95a5a6', color:'#2c3e50' }); }
+  }
 
   // TEXTAREA (Text tab)
   function attachToTextarea(textarea){

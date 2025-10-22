@@ -29,6 +29,8 @@
 .keymap-header{display:flex;gap:8px;align-items:center;justify-content:space-between}
 .keymap-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .keymap-item{background:var(--glass);padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)}
-.phonetic-btn{background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700}
-.phonetic-btn[aria-pressed="true"]{background:linear-gradient(90deg,var(--accent), #bfb57a);border-color:rgba(255,209,102,0.12);color:#071427}
+.phonetic-btn{background:#bdc3c7;border:1px solid #95a5a6;color:#2c3e50;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.phonetic-btn.on{background:#2ecc71;border-color:#27ae60;color:#fff}
+.phonetic-btn.off{background:#bdc3c7;border-color:#95a5a6;color:#2c3e50}
+.phonetic-btn[aria-pressed="true"]{background:#2ecc71;border-color:#27ae60;color:#fff}
 .phonetic-btn:focus{outline:3px solid rgba(255,209,102,0.12);outline-offset:2px}

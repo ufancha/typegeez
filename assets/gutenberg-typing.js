@@ -382,9 +382,9 @@
     var onClick = function(){ var next = !state.enabled; setEnabled(next); setIsOn(next); };
     // Fallback if PluginMoreMenuItem is unavailable
     if(!PluginMoreMenuItem){
-      return el('div', { style:{ padding:'8px' } }, el('button', { className:'components-button', onClick:onClick }, isOn ? "Disable Ge'ez typing" : "Enable Ge'ez typing"));
+      return el('div', { style:{ padding:'8px' } }, el('button', { className:'components-button', onClick:onClick }, "ግ | ግእዝ Ge'ez"));
     }
-    return el(PluginMoreMenuItem, { icon:'translation', role:'menuitemcheckbox', checked:isOn, onClick:onClick }, isOn ? "Disable Ge'ez typing" : "Enable Ge'ez typing");
+    return el(PluginMoreMenuItem, { icon:'translation', role:'menuitemcheckbox', checked:isOn, onClick:onClick }, "ግ | ግእዝ Ge'ez");
   };
 
   registerPlugin('typegeez-gutenberg-typing', { render: ToggleMenuItem });
