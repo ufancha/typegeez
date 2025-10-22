@@ -37,6 +37,23 @@
     if(!s){ s = { buffer:'', compStartRange:null, lastTranslit:'' }; elementState.set(el, s); }
     return s;
   }
+    if(key === ' '){
+      // Handle space in Gutenberg title explicitly (controlled input)
+      if(isTitle(el)){
+        e.preventDefault();
+        if(e.stopImmediatePropagation) e.stopImmediatePropagation(); else if(e.stopPropagation) e.stopPropagation();
+        var idx = getCaretIndexInTitle(el);
+        if(idx != null){
+          var tval3 = getGutenbergTitle();
+          var next3 = tval3.slice(0, idx) + ' ' + tval3.slice(idx);
+          var newPos3 = idx + 1;
+          updateGutenbergTitle(next3);
+          (function(pos, rootEl){ setTimeout(function(){ setCaretIndexInTitle(rootEl, pos); }, 0); })(newPos3, el);
+        }
+        var s3 = getOrInitStateFor(el); s3.buffer=''; s3.compStartRange=null; s3.compStartIndex=null; s3.lastTranslit='';
+        return;
+      }
+    }
 
   function getTitleRoot(el){
     if(!el) return null;
@@ -312,7 +329,7 @@
     // Stop React/Gutenberg from processing native input for the title when typing letters
     var data = (e.data !== undefined) ? e.data : '';
     var type = e.inputType || '';
-    if(isTitle(el) && (type === 'insertText' || /^[A-Za-z]$/.test(data) || punctuationMap[data])){
+    if(isTitle(el) && (/^[A-Za-z]$/.test(data) || punctuationMap[data])){
       if(e.stopImmediatePropagation) e.stopImmediatePropagation();
       else if(e.stopPropagation) e.stopPropagation();
     }
