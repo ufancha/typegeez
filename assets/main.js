@@ -21,8 +21,7 @@
   }
   function updatePhoneticBtnVisual(){
     if(!phoneticBtn) return;
-    // Ensure unified label and color classes
-    phoneticBtn.textContent = 'ግ | ግእዝ Ge\'ez';
+    // Update only classes; keep inner label and on/off pill markup
     phoneticBtn.classList.remove('on','off');
     phoneticBtn.classList.add(phoneticOn() ? 'on' : 'off');
   }

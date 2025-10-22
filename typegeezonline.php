@@ -25,7 +25,10 @@ function typegeez_render_block($atts = array()){
       <div class="editor-top">
         <div class="info">Use your physical keyboard. Toggle phonetic mode for transliteration-based input.</div>
         <div class="modes">
-          <button id="phoneticToggleBtn" class="phonetic-btn off" aria-pressed="false" aria-label="Toggle Ge'ez input">ግ | ግእዝ Ge'ez</button>
+          <button id="phoneticToggleBtn" class="button button-secondary phonetic-btn off" aria-pressed="false" aria-label="Toggle Ge'ez input">
+            <span class="tgz-label">ግዕዝ Ge'ez</span>
+            <span class="tgz-onoff" aria-hidden="true"></span>
+          </button>
         </div>
   <div class="switch-state" id="switchState" aria-live="polite">Off</div>
       </div>
@@ -88,12 +91,16 @@ function typegeez_enqueue_admin_assets($hook){
   // transliteration engine and admin editor integration
   wp_enqueue_script('typegeez-translit', $plugin_url . 'assets/translit.js', array(), false, true);
   wp_enqueue_script('typegeez-admin-editor', $plugin_url . 'assets/admin-editor.js', array('jquery','typegeez-translit'), false, true);
+  // styles for split toggle button
+  wp_enqueue_style('typegeez-style', $plugin_url . 'assets/style.css');
 }
 add_action('admin_enqueue_scripts','typegeez_enqueue_admin_assets');
 
 // Classic editor: place the toggle button at the top toolbar (next to Add Media)
 function typegeez_render_classic_toggle(){
   // Only output on classic editor screens (post.php/post-new.php already gated by admin_enqueue_scripts)
-  echo '<button type="button" id="typegeez-enable-editor" class="button button-primary" style="margin-left:6px" aria-pressed="false" title="Toggle Ge\'ez phonetic typing">Enable Ge\'ez phonetic typing</button>';
+  echo '<button type="button" id="typegeez-enable-editor" class="button button-secondary phonetic-btn off" style="margin-left:6px" aria-pressed="false" title="Toggle Ge\'ez phonetic typing">'
+    . '<span class="tgz-label">ግዕዝ Ge\'ez</span><span class="tgz-onoff" aria-hidden="true"></span>'
+    . '</button>';
 }
 add_action('media_buttons','typegeez_render_classic_toggle', 15);

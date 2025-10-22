@@ -16,11 +16,10 @@
 
   function setAria(btn, val){
     btn.attr('aria-pressed', val ? 'true' : 'false');
-    // Fixed label per request
-    btn.text("ግ | ግእዝ Ge'ez");
-    // Color feedback: green when on, gray when off
-    if(val){ btn.css({ backgroundColor:'#2ecc71', borderColor:'#27ae60', color:'#ffffff' }); }
-    else { btn.css({ backgroundColor:'#bdc3c7', borderColor:'#95a5a6', color:'#2c3e50' }); }
+  // Keep inner label and ON/OFF pill; keep WordPress secondary style for the whole button
+  // We only flip .on/.off to recolor the inner ON/OFF pill via CSS
+  if(val){ btn.removeClass('off').addClass('on'); }
+  else { btn.removeClass('on').addClass('off'); }
   }
 
   // TEXTAREA (Text tab)

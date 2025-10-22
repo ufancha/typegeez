@@ -11,8 +11,8 @@
 .typegeez-app .editor{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
 #output{width:100%;height:320px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit;padding:14px;border-radius:10px;font-size:20px;line-height:1.5;resize:vertical}
 .controls{display:flex;gap:10px;margin-top:8px}
-.controls button{background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);color:#e6eef8;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:600}
-.controls button:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(2,6,23,0.5)}
+.controls button{background:#f6f7f7;border:1px solid #c3c4c7;color:#1d2327;padding:6px 12px;border-radius:3px;cursor:pointer;font-weight:600;box-shadow:0 1px 0 #c3c4c7}
+.controls button:hover{background:#f0f0f1;border-color:#8c8f94;color:#1d2327}
 .editor-top{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 .editor-top .info{flex:1;min-width:200px}
 .switch-state{font-weight:700;color:var(--muted);background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)}
@@ -29,8 +29,38 @@
 .keymap-header{display:flex;gap:8px;align-items:center;justify-content:space-between}
 .keymap-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .keymap-item{background:var(--glass);padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.03)}
-.phonetic-btn{background:#bdc3c7;border:1px solid #95a5a6;color:#2c3e50;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
-.phonetic-btn.on{background:#2ecc71;border-color:#27ae60;color:#fff}
-.phonetic-btn.off{background:#bdc3c7;border-color:#95a5a6;color:#2c3e50}
-.phonetic-btn[aria-pressed="true"]{background:#2ecc71;border-color:#27ae60;color:#fff}
-.phonetic-btn:focus{outline:3px solid rgba(255,209,102,0.12);outline-offset:2px}
+.phonetic-btn{background:#f6f7f7;border:1px solid #c3c4c7;color:#1d2327;padding:6px 12px;border-radius:3px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:8px;box-shadow:0 1px 0 #c3c4c7;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.phonetic-btn.off{background:#f6f7f7;border-color:#2271b1;color:#1d2327}
+.phonetic-btn.on,.phonetic-btn[aria-pressed="true"]{background:#f6f7f7;border-color:#2271b1;color:#1d2327;box-shadow:0 1px 0 #c3c4c7}
+.phonetic-btn:hover{background:#f0f0f1;border-color:#8c8f94;color:#1d2327}
+.button.phonetic-btn.off:hover{border-color:#2271b1}
+.phonetic-btn.on:hover{background:#f0f0f1;border-color:#2271b1;color:#1d2327}
+.phonetic-btn:focus{box-shadow:0 0 0 1px #2271b1}
+
+/* Split-button inner layout */
+/* Inline ON/OFF switch inside the button */
+.phonetic-btn .tgz-label{margin-right:4px}
+/* Convert the inline ON/OFF pill into a WiFi-like toggle switch */
+.phonetic-btn .tgz-onoff{
+  position:relative;
+  width:42px; height:22px;
+  display:inline-block;
+  background:#e0e3e7; /* gray when off */
+  border:1px solid #c3c4c7;
+  border-radius:999px;
+  vertical-align:middle;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.phonetic-btn .tgz-onoff::after{
+  content:"";
+  position:absolute;
+  top:2px; left:2px;
+  width:18px; height:18px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: transform .2s ease;
+}
+.phonetic-btn.off .tgz-onoff{ background:#e0e3e7; border-color:#c3c4c7; }
+.phonetic-btn.on .tgz-onoff{ background:#46b450; border-color:#46b450; }
+.phonetic-btn.on .tgz-onoff::after{ transform: translateX(20px); }
