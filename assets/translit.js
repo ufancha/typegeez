@@ -26,7 +26,9 @@
     p: ['ፐ','ፑ','ፒ','ፓ','ፔ','ፕ','ፖ'],
     f: ['ፈ','ፉ','ፊ','ፋ','ፌ','ፍ','ፎ'],
     v: ['ቨ','ቩ','ቪ','ቫ','ቬ','ቭ','ቮ'],
-    'sh2': ['ሠ','ሡ','ሢ','ሣ','ሤ','ሥ','ሦ'],
+  'sh2': ['ሠ','ሡ','ሢ','ሣ','ሤ','ሥ','ሦ'],
+  // Map double-s to the ሠ-series so 'ssu'->'ሡ', 'ssi'->'ሢ', 'ssa'->'ሣ', 'ss'->'ሥ', 'sso'->'ሦ'
+  ss: ['ሠ','ሡ','ሢ','ሣ','ሤ','ሥ','ሦ'],
     h2: ['ሐ','ሑ','ሒ','ሓ','ሔ','ሕ','ሖ']
   };
 
@@ -81,7 +83,9 @@
     // v-series
     've':'ቨ','vu':'ቩ','vi':'ቪ','va':'ቫ','vie':'ቬ','v':'ቭ','vo':'ቮ',
     // custom: map double s to 6th form ሥ
-    'ss':'ሥ'
+    'ss':'ሥ',
+    // special-case: request sse -> ሠ (override default 6th-form mapping)
+    'sse':'ሠ'
   };
 
   // 8th-column mappings. Capitalized sequences (Shift + sequence) can map to alternate 8th-form glyphs.
