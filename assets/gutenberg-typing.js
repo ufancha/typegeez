@@ -14,6 +14,7 @@
   var elementState = new WeakMap(); // per-editable state
   var listenersAttached = false; // ensure we don't attach twice
   var isUpdatingTitle = false; // prevent feedback when programmatically updating title
+  var punctuationMap = { '.':'።', ',':'፣', ':':'፥', ';':'፤' };
 
   function isEditable(target){
     if(!target) return false;
@@ -226,6 +227,40 @@
     if(!isEditable(el)) return;
     var key = e.key || '';
     if(e.metaKey || e.ctrlKey || e.altKey) { commit(el); return; }
+    var mapped = punctuationMap[key];
+    if(mapped){
+      e.preventDefault();
+      if(e.stopImmediatePropagation) e.stopImmediatePropagation(); else if(e.stopPropagation) e.stopPropagation();
+      // Insert mapped punctuation at caret and clear composition
+      var s = getOrInitStateFor(el);
+      if(isTitle(el)){
+        var caretIdx = getCaretIndexInTitle(el);
+        if(caretIdx != null){
+          var tval = getGutenbergTitle();
+          var next = (tval.slice(0, caretIdx) + mapped + tval.slice(caretIdx));
+          var newPos = caretIdx + mapped.length;
+          updateGutenbergTitle(next);
+          (function(pos, rootEl){ setTimeout(function(){ setCaretIndexInTitle(rootEl, pos); }, 0); })(newPos, el);
+        }
+        s.buffer=''; s.compStartRange=null; s.compStartIndex=null; s.lastTranslit='';
+        return;
+      }
+      if(el.isContentEditable){
+        // Insert at caret by replacing current selection only
+        s.compStartRange = null;
+        replaceFromStartContentEditable(el, s, mapped);
+        s.buffer=''; s.compStartRange=null; s.compStartIndex=null; s.lastTranslit='';
+        return;
+      }
+      if('selectionStart' in el){
+        var st = el.selectionStart, en = el.selectionEnd;
+        var val = el.value || '';
+        el.value = val.slice(0,st) + mapped + val.slice(en);
+        var pos2 = st + mapped.length; el.selectionStart = el.selectionEnd = pos2;
+        s.buffer=''; s.compStartRange=null; s.compStartIndex=null; s.lastTranslit='';
+        return;
+      }
+    }
     if(/^[A-Za-z]$/.test(key)){
       e.preventDefault();
       if(e.stopImmediatePropagation) e.stopImmediatePropagation();
@@ -262,7 +297,7 @@
     // Prevent Gutenberg from inserting raw Latin text; our keydown handler handles it
     if(t === 'insertText' || t === 'insertCompositionText'){
       var data = e.data || '';
-      if(/^[A-Za-z]$/.test(data)){
+      if(/^[A-Za-z]$/.test(data) || punctuationMap[data]){
         e.preventDefault();
         if(e.stopImmediatePropagation) e.stopImmediatePropagation();
         else if(e.stopPropagation) e.stopPropagation();
@@ -277,7 +312,7 @@
     // Stop React/Gutenberg from processing native input for the title when typing letters
     var data = (e.data !== undefined) ? e.data : '';
     var type = e.inputType || '';
-    if(isTitle(el) && (type === 'insertText' || /^[A-Za-z]$/.test(data))){
+    if(isTitle(el) && (type === 'insertText' || /^[A-Za-z]$/.test(data) || punctuationMap[data])){
       if(e.stopImmediatePropagation) e.stopImmediatePropagation();
       else if(e.stopPropagation) e.stopPropagation();
     }

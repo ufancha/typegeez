@@ -6,6 +6,7 @@
   var bufferStart = null;
   var lastTranslit = '';
   var suppressInput = false;
+  var punctuationMap = { '.':'።', ',':'፣', ':':'፥', ';':'፤' };
   // Title (Classic editor) separate state
   var targetTitle = null;
   var bufferTitle = '';
@@ -110,6 +111,14 @@
     input.on('keydown.typegeez', function(e){
       if(!enabled) return;
       if(e.ctrlKey || e.metaKey || e.altKey){ bufferTitle=''; bufferStartTitle=null; lastTranslitTitle=''; return; }
+      var mappedT = punctuationMap[e.key];
+      if(mappedT){
+        e.preventDefault(); if(e.stopImmediatePropagation) e.stopImmediatePropagation(); else if(e.stopPropagation) e.stopPropagation();
+        var st = input.prop('selectionStart'); var en = input.prop('selectionEnd');
+        var v = input.val(); input.val(v.slice(0,st) + mappedT + v.slice(en));
+        var pos = st + mappedT.length; input.prop('selectionStart', pos); input.prop('selectionEnd', pos);
+        bufferTitle=''; bufferStartTitle=null; lastTranslitTitle=''; suppressInputTitle=true; return;
+      }
       if(/^([A-Za-z])$/.test(e.key)){
         e.preventDefault(); if(e.stopImmediatePropagation) e.stopImmediatePropagation(); else if(e.stopPropagation) e.stopPropagation();
         var start = input.prop('selectionStart');
@@ -242,6 +251,11 @@
     ed.on('keydown', function(e){
       if(!enabled) return;
       if(e.ctrlKey || e.metaKey || e.altKey){ composing = false; compStart = null; buffer=''; lastTranslit=''; return; }
+      var mapped = punctuationMap[e.key];
+      if(mapped){
+        e.preventDefault(); ed.selection.setContent(mapped);
+        composing=false; compStart=null; buffer=''; lastTranslit=''; return;
+      }
       var key = e.key || String.fromCharCode(e.keyCode || 0);
       if(/^[A-Za-z]$/.test(key)){
         e.preventDefault();
