@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Type Geez Online
- * Description: Embed an Ethiopic (Ge'ez) phonetic editor via shortcode [typegeez_editor].
- * Version: 0.1.0
- * Author: Your Name
- * Text Domain: typegeezonline
+ * Plugin Name: Type Geez WP
+ * Description: Type Ge’ez/Ethiopic anywhere in WordPress using a phonetic transliteration keyboard. Works in Classic, Gutenberg, and frontend via shortcode with an easy on/off toggle.
+ * Version: 1.0
+ * Author: Habtamu Soressa
+ * Text Domain: typegeezwp
  */
 
 defined('ABSPATH') or die('Direct access not allowed');
