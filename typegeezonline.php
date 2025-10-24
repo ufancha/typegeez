@@ -101,6 +101,8 @@ function typegeez_render_classic_toggle(){
   // Only output on classic editor screens (post.php/post-new.php already gated by admin_enqueue_scripts)
   echo '<button type="button" id="typegeez-enable-editor" class="button button-secondary phonetic-btn off" style="margin-left:6px" aria-pressed="false" title="Toggle Ge\'ez phonetic typing">'
     . '<span class="tgz-label">ግዕዝ Ge\'ez</span><span class="tgz-onoff" aria-hidden="true"></span>'
-    . '</button>';
+    . '</button>'
+    // Insert-shortcode helper for Classic editor
+    . ' <button type="button" id="typegeez-insert-shortcode" class="button" title="Insert Type Geez editor shortcode">Insert Type Geez</button>';
 }
 add_action('media_buttons','typegeez_render_classic_toggle', 15);

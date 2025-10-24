@@ -323,5 +323,35 @@
     // Re-attach when user switches Visual/Text
     $('body').on('click', '#content-tmce', function(){ if(enabled){ setTimeout(attachCurrentEditor, 150); }});
     $('body').on('click', '#content-html', function(){ if(enabled){ var ta = $('#content'); if(ta.length) attachToTextarea(ta); }});
+
+    // Insert shortcode button for Classic editor
+    $('#typegeez-insert-shortcode').on('click', function(e){
+      e.preventDefault();
+      var shortcode = '[typegeez_editor]';
+      try{
+        if(window.wp && wp.editor && typeof wp.editor.insert === 'function'){
+          wp.editor.insert(shortcode);
+          return;
+        }
+      }catch(err){}
+      if(typeof window.send_to_editor === 'function'){
+        window.send_to_editor(shortcode);
+        return;
+      }
+      // Fallback: direct textarea insertion
+      var ta = jQuery('#content');
+      if(ta && ta.length){
+        var start = ta.prop('selectionStart');
+        if(typeof start !== 'number'){ start = ta.val().length; }
+        var val = ta.val();
+        var before = val.slice(0, start);
+        var after = val.slice(start);
+        ta.val(before + shortcode + after);
+        var caret = before.length + shortcode.length;
+        ta.focus();
+        ta.prop('selectionStart', caret);
+        ta.prop('selectionEnd', caret);
+      }
+    });
   });
 })(jQuery);
