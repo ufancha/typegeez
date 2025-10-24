@@ -84,7 +84,7 @@ function typegeez_register_block(){
   $plugin_url = plugin_dir_url(__FILE__);
   wp_register_script('typegeez-block-editor', $plugin_url . 'assets/block-editor.js', array('wp-blocks','wp-element'), false, true);
   // Server-side render the block using the dedicated render callback
-  register_block_type('typegeezonline/editor', array(
+  register_block_type('typegeezwp/editor', array(
     'editor_script' => 'typegeez-block-editor',
     'render_callback' => 'typegeez_render_block'
   ));

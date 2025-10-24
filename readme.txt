@@ -30,7 +30,7 @@ Performance: Assets are only loaded where needed (shortcode/block usage and edit
 - Explicit "sse" → ሠ override
 
 == Installation ==
-1. Upload the plugin files to `/wp-content/plugins/typegeezonline` or install via Plugins → Add New.
+1. Upload the plugin files to `/wp-content/plugins/typegeezwp` or install via Plugins → Add New.
 2. Activate the plugin through the "Plugins" screen in WordPress.
 3. Classic Editor: You’ll see a "ግዕዝ Ge’ez" toggle near Add Media and an "Insert Type Geez" button to insert the shortcode.
 4. Gutenberg: Add the "Type Geez" block, or use a Shortcode block with `[typegeez_editor]`.
