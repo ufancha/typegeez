@@ -88,6 +88,12 @@ add_action('enqueue_block_editor_assets','typegeez_enqueue_block_editor_assets')
 function typegeez_enqueue_admin_assets($hook){
   if(!in_array($hook, array('post.php','post-new.php'))) return;
   $plugin_url = plugin_dir_url(__FILE__);
+  // Ensure core editor utilities are available (wp.editor, send_to_editor)
+  if(function_exists('wp_enqueue_editor')){
+    wp_enqueue_editor();
+  } else {
+    wp_enqueue_script('editor');
+  }
   // transliteration engine and admin editor integration
   wp_enqueue_script('typegeez-translit', $plugin_url . 'assets/translit.js', array(), false, true);
   wp_enqueue_script('typegeez-admin-editor', $plugin_url . 'assets/admin-editor.js', array('jquery','typegeez-translit'), false, true);

@@ -331,6 +331,19 @@
     $(document).on('click', '#typegeez-insert-shortcode', function(e){
       e.preventDefault();
       var shortcode = '[typegeez_editor]';
+      // 1) TinyMCE direct insert (Visual tab)
+      try{
+        if(window.tinymce && tinymce.activeEditor && !tinymce.activeEditor.isHidden()){
+          tinymce.activeEditor.focus();
+          if(typeof tinymce.activeEditor.insertContent === 'function'){
+            tinymce.activeEditor.insertContent(shortcode);
+          } else {
+            tinymce.activeEditor.execCommand('mceInsertContent', false, shortcode);
+          }
+          return;
+        }
+      }catch(err){}
+      // 2) WordPress editor helper API
       try{
         if(window.wp && wp.editor && typeof wp.editor.insert === 'function'){
           wp.editor.insert(shortcode);
