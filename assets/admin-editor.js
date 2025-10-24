@@ -292,8 +292,9 @@
 
   $(document).ready(function(){
     var btn = $('#typegeez-enable-editor');
-    if(!btn.length) return;
-    setAria(btn, false);
+    if(btn.length){
+      setAria(btn, false);
+    }
 
     function attachCurrentEditor(){
       if(typeof tinymce !== 'undefined' && tinymce.activeEditor && !tinymce.activeEditor.isHidden()){
@@ -304,28 +305,30 @@
       var title = $('#title'); if(title.length) attachToTitle(title);
     }
 
-    btn.on('click', function(){
-      enabled = !enabled; setAria(btn, enabled);
-      if(enabled){
-        attachCurrentEditor();
-        var tries = 0; var iv = setInterval(function(){
-          if(!enabled){ clearInterval(iv); return; }
-          if(typeof tinymce !== 'undefined' && tinymce.activeEditor){ attachCurrentEditor(); clearInterval(iv); }
-          if(++tries > 10){ clearInterval(iv); }
-        }, 200);
-      } else {
-        detachFromTextarea(); detachFromTinyMCE(); detachFromTitle();
-        buffer = ''; bufferStart = null; lastTranslit = ''; suppressInput = false;
-        bufferTitle = ''; bufferStartTitle = null; lastTranslitTitle = ''; suppressInputTitle = false;
-      }
-    });
+    if(btn.length){
+      btn.on('click', function(){
+        enabled = !enabled; setAria(btn, enabled);
+        if(enabled){
+          attachCurrentEditor();
+          var tries = 0; var iv = setInterval(function(){
+            if(!enabled){ clearInterval(iv); return; }
+            if(typeof tinymce !== 'undefined' && tinymce.activeEditor){ attachCurrentEditor(); clearInterval(iv); }
+            if(++tries > 10){ clearInterval(iv); }
+          }, 200);
+        } else {
+          detachFromTextarea(); detachFromTinyMCE(); detachFromTitle();
+          buffer = ''; bufferStart = null; lastTranslit = ''; suppressInput = false;
+          bufferTitle = ''; bufferStartTitle = null; lastTranslitTitle = ''; suppressInputTitle = false;
+        }
+      });
+    }
 
     // Re-attach when user switches Visual/Text
     $('body').on('click', '#content-tmce', function(){ if(enabled){ setTimeout(attachCurrentEditor, 150); }});
     $('body').on('click', '#content-html', function(){ if(enabled){ var ta = $('#content'); if(ta.length) attachToTextarea(ta); }});
 
-    // Insert shortcode button for Classic editor
-    $('#typegeez-insert-shortcode').on('click', function(e){
+    // Insert shortcode button for Classic editor (delegate in case toolbar renders later)
+    $(document).on('click', '#typegeez-insert-shortcode', function(e){
       e.preventDefault();
       var shortcode = '[typegeez_editor]';
       try{
