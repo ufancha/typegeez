@@ -23,8 +23,13 @@ Accessibility: The toggle is keyboard accessible and uses ARIA attributes for st
 
 Performance: Assets are only loaded where needed (shortcode/block usage and editor screens).
 
+== Source & Build ==
+- Full, human-readable source code for every JavaScript and CSS asset ships inside this plugin under `/assets`. The files in that directory are exactly what WordPress enqueues—there is no minification or obfuscation.
+- Development happens in the public repository at https://github.com/ufancha/typegeez where the complete history, issues, and pull requests are maintained.
+- No build tooling is required today; if you want to make changes, edit the files in `/assets`, test locally, and commit. Should a bundler be introduced in the future, we will document the commands in this section and in `docs/SOURCE.md`.
+
 == Installation ==
-1. Upload the plugin files to `/wp-content/plugins/typegeez` or install via Plugins → Add New.
+1. Upload the plugin files to `/wp-content/plugins/type-geez` or install via Plugins → Add New.
 2. Activate the plugin through the "Plugins" screen in WordPress.
 3. Classic Editor: You’ll see a "ግዕዝ Ge’ez" toggle near Add Media and an "Insert Type Geez" button to insert the shortcode.
 4. Gutenberg: Add the "Type Geez" block, or use a Shortcode block with `[typegeez_editor]`.

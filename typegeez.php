@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Type Geez
- * Plugin URI: https://github.com/ufancha/typegeez
+ * Plugin URI: https://wordpress.org/plugins/type-geez/
  * Description: Type Ge’ez/Ethiopic anywhere in WordPress using a phonetic transliteration keyboard. Works in Classic, Gutenberg, and frontend via shortcode with an easy on/off toggle.
  * Version: 1.0.0
  * Author: Habtamu Soressa
- * Author URI: https://github.com/ufancha
+ * Author URI: https://profiles.wordpress.org/ufancha/
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Requires at least: 5.2
@@ -28,7 +28,7 @@ defined('ABSPATH') or die('Direct access not allowed');
 // uncomment the example below and hook it to 'plugins_loaded' instead of 'init'.
 //
 // function typegeez_load_textdomain(){
-//   load_plugin_textdomain('typegeez', false, dirname(plugin_basename(__FILE__)) . '/languages');
+//   load_plugin_textdomain('type-geez', false, dirname(plugin_basename(__FILE__)) . '/languages');
 // }
 // add_action('plugins_loaded','typegeez_load_textdomain');
 
@@ -59,27 +59,27 @@ function typegeez_render_block($atts = array()){
     ?>
     <div class="typegeez-app">
       <div class="editor-top">
-  <div class="info"><?php echo esc_html__("Use your physical keyboard. Toggle phonetic mode for transliteration-based input.", 'typegeez'); ?></div>
+  <div class="info"><?php echo esc_html__("Use your physical keyboard. Toggle phonetic mode for transliteration-based input.", 'type-geez'); ?></div>
         <div class="modes">
-          <button id="phoneticToggleBtn" class="button button-secondary phonetic-btn off" aria-pressed="false" aria-label="<?php echo esc_attr__("Toggle Ge'ez input", 'typegeez'); ?>">
-            <span class="tgz-label"><?php echo esc_html__("ግዕዝ Ge'ez", 'typegeez'); ?></span>
+          <button id="phoneticToggleBtn" class="button button-secondary phonetic-btn off" aria-pressed="false" aria-label="<?php echo esc_attr__("Toggle Ge'ez input", 'type-geez'); ?>">
+            <span class="tgz-label"><?php echo esc_html__("ግዕዝ Ge'ez", 'type-geez'); ?></span>
             <span class="tgz-onoff" aria-hidden="true"></span>
           </button>
         </div>
-  <div class="switch-state" id="switchState" aria-live="polite"><?php echo esc_html__('Off', 'typegeez'); ?></div>
+  <div class="switch-state" id="switchState" aria-live="polite"><?php echo esc_html__('Off', 'type-geez'); ?></div>
       </div>
-  <textarea id="output" placeholder="<?php echo esc_attr__('Start typing...', 'typegeez'); ?>"></textarea>
+  <textarea id="output" placeholder="<?php echo esc_attr__('Start typing...', 'type-geez'); ?>"></textarea>
       <div id="composition" class="composition" aria-live="polite"></div>
       <div class="controls">
-  <button id="clearBtn"><?php echo esc_html__('Clear', 'typegeez'); ?></button>
-  <button id="copyBtn"><?php echo esc_html__('Copy', 'typegeez'); ?></button>
-  <button id="downloadBtn"><?php echo esc_html__('Download (.txt)', 'typegeez'); ?></button>
+  <button id="clearBtn"><?php echo esc_html__('Clear', 'type-geez'); ?></button>
+  <button id="copyBtn"><?php echo esc_html__('Copy', 'type-geez'); ?></button>
+  <button id="downloadBtn"><?php echo esc_html__('Download (.txt)', 'type-geez'); ?></button>
       </div>
       <div id="keymapModal" class="keymap-modal" aria-hidden="true">
         <div class="keymap-panel">
-          <div class="keymap-header"><input id="keymapSearch" placeholder="<?php echo esc_attr__('Search Latin sequence or Ethiopic', 'typegeez'); ?>" /><button id="keymapClose"><?php echo esc_html__('Close', 'typegeez'); ?></button></div>
+          <div class="keymap-header"><input id="keymapSearch" placeholder="<?php echo esc_attr__('Search Latin sequence or Ethiopic', 'type-geez'); ?>" /><button id="keymapClose"><?php echo esc_html__('Close', 'type-geez'); ?></button></div>
           <div id="keymapList" class="keymap-list"></div>
-          <div style="margin-top:8px"><a id="downloadKeymap" href="#"><?php echo esc_html__('Download keymap JSON', 'typegeez'); ?></a></div>
+          <div style="margin-top:8px"><a id="downloadKeymap" href="#"><?php echo esc_html__('Download keymap JSON', 'type-geez'); ?></a></div>
         </div>
       </div>
     </div>
@@ -157,10 +157,10 @@ add_action('admin_enqueue_scripts','typegeez_enqueue_admin_assets');
 // Classic editor: place the toggle button at the top toolbar (next to Add Media)
 function typegeez_render_classic_toggle(){
   // Only output on classic editor screens (post.php/post-new.php already gated by admin_enqueue_scripts)
-  echo '<button type="button" id="typegeez-enable-editor" class="button button-secondary phonetic-btn off" style="margin-left:6px" aria-pressed="false" title="' . esc_attr__("Toggle Ge'ez phonetic typing", 'typegeez') . '">'
-    . '<span class="tgz-label">' . esc_html__("ግዕዝ Ge'ez", 'typegeez') . '</span><span class="tgz-onoff" aria-hidden="true"></span>'
+  echo '<button type="button" id="typegeez-enable-editor" class="button button-secondary phonetic-btn off" style="margin-left:6px" aria-pressed="false" title="' . esc_attr__("Toggle Ge'ez phonetic typing", 'type-geez') . '">'
+    . '<span class="tgz-label">' . esc_html__("ግዕዝ Ge'ez", 'type-geez') . '</span><span class="tgz-onoff" aria-hidden="true"></span>'
     . '</button>'
     // Insert-shortcode helper for Classic editor
-    . ' <button type="button" id="typegeez-insert-shortcode" class="button" title="' . esc_attr__('Insert Type Geez editor shortcode', 'typegeez') . '">' . esc_html__('Insert Type Geez', 'typegeez') . '</button>';
+    . ' <button type="button" id="typegeez-insert-shortcode" class="button" title="' . esc_attr__('Insert Type Geez editor shortcode', 'type-geez') . '">' . esc_html__('Insert Type Geez', 'type-geez') . '</button>';
 }
 add_action('media_buttons','typegeez_render_classic_toggle', 15);
