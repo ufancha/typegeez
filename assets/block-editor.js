@@ -1,11 +1,11 @@
 (function(blocks, element) {
   var el = element.createElement;
-  blocks.registerBlockType('typegeezwp/editor', {
-    title: 'Type Geez WP Editor',
+  blocks.registerBlockType('typegeez/editor', {
+    title: 'Type Geez Editor',
     icon: 'translation',
     category: 'widgets',
     edit: function(props) {
-      return el('div', {className: 'typegeez-block-placeholder'}, 'Type Geez WP Editor (preview available in editor)');
+      return el('div', {className: 'typegeez-block-placeholder'}, 'Type Geez Editor (preview available in editor)');
     },
     save: function() { return null; } // server-side render
   });

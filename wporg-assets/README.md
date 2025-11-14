@@ -28,5 +28,5 @@ Example SVN layout:
 ```
 
 Notes:
-- Colors use WordPress blue (#2271b1 → #135e96). Text: “Type Geez WP” and Ethiopic glyphs (ግዕዝ).
+- Colors use WordPress blue (#2271b1 → #135e96). Text: “Type Geez” and Ethiopic glyphs (ግዕዝ).
 - If Ethiopic fonts are missing on export, install “Noto Sans Ethiopic” or “Abyssinica SIL”.

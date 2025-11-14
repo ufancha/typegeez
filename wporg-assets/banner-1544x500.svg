@@ -7,7 +7,7 @@
   </defs>
   <rect width="1544" height="500" fill="url(#g)"/>
   <g fill="#ffffff">
-    <text x="80" y="210" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="96" font-weight="700">Type Geez WP</text>
+  <text x="80" y="210" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="96" font-weight="700">Type Geez</text>
     <text x="80" y="290" font-family="Segoe UI, Arial, Helvetica, sans-serif" font-size="34" opacity="0.9">Ge’ez/Ethiopic phonetic typing for WordPress</text>
     <text x="80" y="380" font-family="Noto Sans Ethiopic, Abyssinica SIL, serif" font-size="86" opacity="0.95">ግዕዝ • ትይዩ ፊደል</text>
   </g>

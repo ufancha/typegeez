@@ -106,7 +106,9 @@
     'nua':'ኗ','Nua':'ኟ',
     'doa':'ዯ','Doa':'ዯ',
     'gua':'ጓ','Gua':'ጓ',
-    'xua':'ጇ','Xua':'ጇ',
+  'xua':'ጇ','Xua':'ጇ',
+  // ch/c labialized (wa) forms
+  'cua':'ቿ','Cua':'ጯ','chua':'ቿ','Chua':'ጯ',
     'x2ua':'ፇ','X2ua':'ፇ',
     'fua':'ፏ','Fua':'ፏ',
     'pua':'ፗ','Pua':'ፗ'
