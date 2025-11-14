@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Type Geez
- * Plugin URI: https://github.com/ufancha/typegeezwp
+ * Plugin URI: https://github.com/ufancha/typegeez
  * Description: Type Ge’ez/Ethiopic anywhere in WordPress using a phonetic transliteration keyboard. Works in Classic, Gutenberg, and frontend via shortcode with an easy on/off toggle.
  * Version: 1.0.0
  * Author: Habtamu Soressa
